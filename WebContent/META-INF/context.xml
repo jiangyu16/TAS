@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context >
+	<Resource  name="jdbc/tas"
+	auth="Container"
+	type="javax.sql.DataSource"
+	username="sa"
+	password="123"
+	maxActive="100"
+	maxIdle="10"
+	maxWait="5000"
+	URIEncoding="UTF-8"
+	driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+	url="jdbc:sqlserver://localhost:1433;DatabaseName=db_exam"/>
+</Context>

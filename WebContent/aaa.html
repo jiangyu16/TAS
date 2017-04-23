@@ -1,0 +1,969 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>毕业设计（论文）管理系统</title>
+    <meta name="keywords" content="福州康普特信息科技有限公司,毕业设计（论文）管理系统">
+    <meta name="description" content="福州康普特信息科技有限公司,毕业设计（论文）管理系统">
+
+    
+
+
+ <!--<link href="/thesisadmin/style/bootstrap.min.css?v=3.4.0" rel="stylesheet">-->
+
+ <link href="/thesisadmin/jslib/plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/thesisadmin/style/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="/thesisadmin/jslib/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <!-- toastr -->
+    <link href="/thesisadmin/jslib/plugins/toastr-master/build/toastr.min.css" rel="stylesheet">
+    
+    <link href="/thesisadmin/style/animate.css" rel="stylesheet">    
+
+    <link href="/thesisadmin/style/jquery.mCustomScrollbar.css" rel="stylesheet">
+    
+    <link href="/thesisadmin/jslib/plugins/bootstrap-datetimepicker-master/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="/thesisadmin/jslib/plugins/datatables-1.10.9/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="/thesisadmin/jslib/plugins/datatables-1.10.9/extensions/Responsive/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css" />
+     
+    <!-- 验证 -->
+    <!--<link href="/thesisadmin/jslib/plugins/bootstrapvalidator-master/dist/css/bootstrapValidator.min.css" rel="stylesheet" type="text/css" /> -->
+
+    <link href="/thesisadmin/style/style.css?v=2.2.0" rel="stylesheet">
+
+</head>
+
+<body ng-app="Thesis" ng-controller="indexCtrl" ng-init="init()">
+    <div id="wrapper">
+               
+        <!-- 左侧菜单 -->
+        
+
+
+
+
+<!--[if lte IE 10]>
+				<div id="ie6-warning"><p>本页面采用HTML5+CSS3，您正在使用老版本 Internet Explorer ，在本页面的显示效果可能有差异。建议您升级到Internet Explorer 11或以下浏览器：
+				    <br>
+				
+				<a href="http://browser.qq.com/?adtag=SEM1" target="_blank"><img src="/thesisadmin/images/qq.png">QQ浏览器</a> / 
+				<a href="http://se.360.cn/" target="_blank"><img src="/thesisadmin/images/360.png">360浏览器</a> /
+				<a href="http://www.firefox.com.cn/" target="_blank"><img src="/thesisadmin/images/firefox.png">火狐浏览器</a> / 
+				<a href="http://www.google.cn/chrome/browser/index.html?hl=zh-CN&standalone=1" target="_blank"><img src="/thesisadmin/images/chrome.png">谷歌浏览器</a> / 
+				<a href="http://windows.microsoft.com/zh-cn/internet-explorer/download-ie" target="_blank"><img src="/thesisadmin/images/ie.png">ie浏览器</a> 
+				</p></div>
+				<style type="text/css">
+				/*ie6提示*/
+				#ie6-warning{width:100%;background:#ffffe1;padding:5px 0;font-size:12px}
+				#ie6-warning p{width:960px;margin:0 auto;}
+				  </style>
+	<![endif]-->
+
+<nav id="sidebar1"
+	class="navbar-default navbar-static-side left-menu-scroll-1"
+	role="navigation">
+	<div id="sidebar2" class="sidebar-collapse left-menu-scroll-2">
+
+		<div class="nav-header" style="padding:23px 0;">
+			<div class="dropdown profile-element">
+				<span> <img src="/thesisadmin/images/logo_school.png" />
+					<a href="/thesisadmin/index.jsp"><!-- <img
+						src="/thesisadmin/images/logo_lw.png" /> --></a>
+				</span>
+			</div>
+			<div class="logo-element">
+				<a href="/thesisadmin/index.jsp"><img
+					src="/thesisadmin/images/logo_school_small.png" /></a>
+			</div>
+
+		</div>
+		<div id="sidebar3"
+			class="left-menu-scroll-3 content mCustomScrollbar light"
+			data-mcs-theme="minimal-dark" ng-controller="menuCtrl"
+			ng-init="initMenu()">
+			<ul class="nav" id="side-menu">
+				<li ng-repeat="m in menuList track by $index"
+					class="{{m.menu.url | menufilter:'/thesisadmin/index.jsp'}}"
+					on-repeat-finished-render repeat-id="r1"><a href="#"><i
+						class="{{m.menu.iconcls}}"></i> <span class="nav-label">{{m.menu.text}}</span>
+						<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li ng-repeat="submenu in m.submenus"
+							class="{{submenu.url | submenufilter:'/thesisadmin/index.jsp'}}"><a
+							href="/thesisadmin{{submenu.url}}">{{submenu.text}}</a></li>
+					</ul></li>
+
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+        
+            <!-- 头部导航 -->
+            
+
+			
+			
+            <div class="row my-fixed-header " ng-controller="headCtrl" ng-init="initHead()">
+                <nav class="navbar navbar-static-top border-bottom" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                        <span class="" ></span>
+                    </div>
+                    <div class="navbar-header welcome-message">
+			           <h2 style="margin-top: 16px;">毕业设计(论文)管理系统</h2>
+		            </div>
+                    <ul class="nav navbar-top-links navbar-right">
+
+
+
+  <!-- 
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <i class="fa fa-th-large"></i> <span class="label label-warning"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-messages">
+                                <li>
+                                    <div class="dropdown-messages-box">
+                                        <div class="media-body">
+                                             2018届计算机系毕业设计（论文） 工作流                                                             
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="dropdown-messages-box">
+                                        <div class="media-body">
+                                             2017届计算机系毕业设计（论文） 工作流                                                                  
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                 
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="text-center link-block">
+                                        <a href="#">
+                                            <i class="fa fa-envelope"></i> <strong> 查看所有工作流</strong>
+                                        </a>
+                                    </div>
+                                </li>
+                               
+                            </ul>
+                        </li>
+                        
+      <!--
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
+                                <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-alerts">
+                                <li>
+                                    <a href="mailbox.html">
+                                        <div>
+                                            <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
+                                            <span class="pull-right text-muted small">4分钟前</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="profile.html">
+                                        <div>
+                                            <i class="fa fa-qq fa-fw"></i> 3条新回复
+                                            <span class="pull-right text-muted small">12分钟钱</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="text-center link-block">
+                                        <a href="notifications.html">
+                                            <strong>查看所有 </strong>
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+  -->                      
+                       
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-columns"></i>{{jieSelect==""?"全部届":jieSelect+"届"}}<span class="caret"></span></a>
+                          <ul class="dropdown-menu animated fadeInRight m-t-xs" >
+
+                                <li ng-repeat="jiedata in jieList"><a href="#" ng-click="qiehuanjie(jiedata.wjie)"> {{jiedata.wjie}}　　<span class="glyphicon glyphicon-ok" ng-hide="jieSelect!=jiedata.wjie"></span></a>
+                                </li>
+                              
+                                
+                                <li><a href="#" ng-click="qiehuanjie('')">全部届　　<span class="glyphicon glyphicon-ok" ng-hide="jieSelect!=''"></span></a>
+                                </li>
+
+                            </ul>
+                        </li>
+                       
+                        
+                        
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.trueName}}{{user.userRoles}}<span class="caret"></span></a>
+                          <ul class="dropdown-menu animated fadeInRight m-t-xs">
+
+                                <li><a href="#" ng-click="edit()">个人资料</a>
+                                </li>
+                                
+                                <li><a href="#" ng-click="modifyPwd()">修改密码</a>
+                                </li>
+
+
+                                <li><a href="#" ng-click="logout()">安全退出</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        
+                    </ul>
+                </nav>
+            </div>         
+   
+   									<!-- 模态窗口 -->
+									<div class="modal fade" data-backdrop="static"
+										id="head_sysuserModal" tabindex="-1" role="dialog"
+										aria-hidden="true">
+										<div class="modal-dialog modal-md">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">
+														<span aria-hidden="true">&times;</span><span
+															class="sr-only">Close</span>
+													</button>
+													<h2 class="modal-title">修改管理员个人资料</h2>
+												</div>
+												<div class="modal-body">
+													<div class="row">
+
+														<!-- 表单布局 -->
+														<form id="head_sysuserForm">
+															<div class="col-md-12">
+																<div class="form-group">
+																	<label class="col-sm-3 control-label">系统用户名称：</label>
+																	<div class="col-sm-9">
+																		<input class="form-control" type="text" name="sysname" readonly="readonly"
+																			placeholder="请输入系统用户名称" ng-model="head_sysuser.sysname">
+																		<span class="help-block m-b-none"></span>
+
+																	</div>																	
+																</div>
+																
+																<div class="form-group">
+																	
+																	<label class="col-sm-3 control-label">备注：</label>
+																	<div class="col-sm-9">
+																		<input class="form-control" type="text" name="remark"
+																			placeholder="请输入系统用户备注" ng-model="head_sysuser.remark">
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																</div>
+																
+																
+
+															</div>
+														</form>
+														<!-- 表单布局结束 -->
+
+
+														
+
+
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-white"
+														data-dismiss="modal">关闭</button>
+													<button type="button" class="btn btn-primary"
+														ng-click="saveSysuser()">保存</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- 模态窗口结束 -->	
+   			
+            						<!-- 模态窗口 -->
+                                        <div class="modal fade" data-backdrop="static" id="head_studentModal" tabindex="-1" role="dialog"  aria-hidden="true">
+			                                <div class="modal-dialog modal-lg">
+			                                    <div class="modal-content">
+			                                        <div class="modal-header">
+			                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			                                            <h2 class="modal-title">修改学生个人资料</h2>
+			                                        </div>
+			                                        <div class="modal-body">
+													<div class="row">
+
+														<!-- 表单布局 -->
+														<form id="head_studentForm">
+																<div class="col-md-12">
+																	<label class="col-sm-2 control-label">姓名：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text" readonly="readonly"
+																			placeholder="请输入姓名" ng-model="head_student.sname"
+																			> <span
+																			class="help-block m-b-none"></span>
+																	</div>
+																	<label class="col-sm-2 control-label">学号：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text" readonly="readonly"
+																			placeholder="请输入学号" ng-model="head_student.sno">
+																		<span class="help-block m-b-none"></span>
+																	</div>											
+																</div>
+																<div class="col-md-12">
+																	<label class="col-sm-2 control-label">学院名称：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text"
+																			ng-model="head_student.coname"
+																			 readonly="readonly">
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																	<label class="col-sm-2 control-label">系部名称：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text"
+																			ng-model="head_student.dname"
+																			 readonly="readonly">
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-sm-2 control-label">专业名称：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text"
+																			ng-model="head_student.spname"
+																			 readonly="readonly">
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																	<label class="col-sm-2 control-label">届：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text"
+																			placeholder="请输入届" ng-model="head_student.sjie"
+																			 readonly="readonly"> <span
+																			class="help-block m-b-none"></span>
+																	</div>
+																	
+																</div>
+																<div class="col-md-12">
+																	<label class="col-sm-2 control-label">年级：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text"
+																			placeholder="请输入年级" ng-model="head_student.sgrade"
+																			 readonly="readonly"> <span
+																			class="help-block m-b-none"></span>
+																	</div>
+																	<label class="col-sm-2 control-label">班级：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text"
+																			placeholder="请输入班级" ng-model="head_student.sclass"
+																			 readonly="readonly"> <span
+																			class="help-block m-b-none"></span>
+																	</div>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-sm-2 control-label">用户名：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text" readonly="readonly"
+																			placeholder="请输入用户名" ng-model="head_student.susername">
+																		<span class="help-block m-b-none"></span>
+
+																	</div>
+																	<label class="col-sm-2 control-label">联系电话：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text"
+																			placeholder="请输入联系电话" ng-model="head_student.sphone">
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-sm-2 control-label">性别：</label>
+																	<div class="col-sm-4">
+																		<select class="form-control" ng-model="head_student.ssex">
+																			<option>男</option>
+																			<option>女</option>
+																		</select>
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																	<label class="col-sm-2 control-label">QQ：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text"
+																			placeholder="请输入QQ" ng-model="head_student.sqq"> <span
+																			class="help-block m-b-none"></span>
+																	</div>
+																</div>
+																<div class="col-md-12">
+																	 <label class="col-sm-2 control-label">简介：</label>
+															        <div class="col-sm-10">
+																		<textarea class="form-control" type="text"
+																			 ng-model="head_student.sintroduce">
+																		</textarea>
+																		<span class="help-block m-b-none"></span>
+															        </div>
+																	<label class="col-sm-2 control-label">备注：</label>
+																	<div class="col-sm-4">
+																		<textarea class="form-control" type="text"
+																			placeholder="请输入备注" ng-model="head_student.remark"></textarea>
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																</div>					
+														</form>
+														<!-- 表单布局结束 -->
+
+
+
+													</div>
+												</div>			
+			                                        <div class="modal-footer">
+			                                            <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+			                                            <button type="button" class="btn btn-primary" ng-click="saveStudent()">保存</button>
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                            <!-- 模态窗口结束 -->
+			                            
+			 						<!-- 模态窗口 -->
+									<div class="modal fade" data-backdrop="static"
+										id="head_teacherModal" tabindex="-1" role="dialog"
+										aria-hidden="true">
+										<div class="modal-dialog modal-lg">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">
+														<span aria-hidden="true">&times;</span><span
+															class="sr-only">Close</span>
+													</button>
+													<h2 class="modal-title">修改教师个人资料</h2>
+												</div>
+												<div class="modal-body">
+													
+													<div class="row">
+
+														<!-- 表单布局 -->
+														<form id="head_teacherForm">
+																<div class="col-md-12">
+																	<label class="col-sm-2 control-label">教师编号：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text" readonly="readonly"
+																			placeholder="请输入教师编号" 
+																			 ng-model="head_teacher.tno">
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																	<label class="col-sm-2 control-label">教师名称：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text"  readonly="readonly"
+																			placeholder="请输入教师名称" ng-model="head_teacher.tname">
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																</div>
+
+																<div class="col-md-12">
+																	<label class="col-sm-2 control-label">学院名称：</label>
+																	<div class="col-sm-4">
+
+																		<!-- 
+																		<select class="form-control" ng-model="head_teacher.coid"
+																			ng-options="college.id as college.coname for college in selxlkCollege"
+																			ng-change="selChangeValue(head_teacher.coid)"
+																			ng-readonly="readonly"="true">
+																			
+																		</select> -->
+																		<input class="form-control" type="text"
+																			ng-model="head_teacher.coname"
+																			 readonly="readonly">
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																	<label class="col-sm-2 control-label">系部名称：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text"
+																			ng-model="head_teacher.dname" 
+																			 readonly="readonly">
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-sm-2 control-label">教研室名称：</label>
+																	<div class="col-sm-4">
+																		 <div class="input-group">
+																	        <input type="text" class="form-control"  ng-model="head_teacher.toffice" readonly="readonly">
+																	        
+																        </div>	      
+																		<span class="help-block m-b-none"></span>	
+																		<!--  <select class="form-control" 
+																			ng-options="head_teacheroffice.id as head_teacheroffice.toname for head_teacheroffice in selxlkTeacherOffice"
+																			>
+																		</select>
+																		-->
+																	</div>
+																	 <label class="col-sm-2 control-label">职称：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text"
+																			placeholder="" ng-model="head_teacher.tpositionaltitle" >
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-sm-2 control-label">用户名：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text" readonly="readonly"
+																			placeholder="请输入用户名" ng-model="head_teacher.tusername">
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																	<label class="col-sm-2 control-label">QQ：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text"
+																			placeholder="请输入QQ" ng-model="head_teacher.tqq">
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-sm-2 control-label">联系电话：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text"
+																			placeholder="请输入联系电话" ng-model="head_teacher.tphone">
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																	<label class="col-sm-2 control-label">是否外聘：</label>
+																	<div class="col-sm-4">
+																		<input class="form-control" type="text"
+																			ng-model="head_teacher.texternal"
+																			 readonly="readonly">
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																</div>	
+																<div class="col-md-12">
+																	<label class="col-sm-2 control-label">简介：</label>
+														        	<div class="col-sm-4">
+																	<textarea class="form-control" type="text"
+																		 ng-model="head_teacher.tintroduce">
+																	</textarea>
+																	<span class="help-block m-b-none"></span>
+														        	</div>
+																	<label class="col-sm-2 control-label">备注：</label>
+																	<div class="col-sm-4">
+																		<textarea class="form-control" type="text"
+																			placeholder="请输入备注" ng-model="head_teacher.remark"></textarea>
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																</div>	
+																
+														</form>
+														<!-- 表单布局结束 -->
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-white"
+														data-dismiss="modal">关闭</button>
+													<button type="button" class="btn btn-primary"
+														ng-click="saveTeacher()">保存</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- 模态窗口结束 -->   
+									
+									
+									<!-- 模态窗口 -->
+									<div class="modal fade" data-backdrop="static"
+										id="head_modifyPwdModal" tabindex="-1" role="dialog"
+										aria-hidden="true">
+										<div class="modal-dialog modal-md">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">
+														<span aria-hidden="true">&times;</span><span
+															class="sr-only">Close</span>
+													</button>
+													<h2 class="modal-title">修改密码</h2>
+												</div>
+												<div class="modal-body">
+													<div class="row">
+
+														<!-- 表单布局 -->
+														<form id="head_modifyPwdForm">
+															<div class="col-md-12">
+																<div class="form-group">																	
+																	<label class="col-sm-3 control-label">输入密码：</label>
+																	<div class="col-sm-9">
+																		<input id="head_pwd" class="form-control" type="password" name="head_pwd"
+																			placeholder="请输入密码" ng-model="headPwd.pwd">
+																		<span class="help-block m-b-none"></span>
+
+																	</div>
+																</div>
+																
+																<div class="form-group">
+																	<label class="col-sm-3 control-label">确认密码：</label>
+																	<div class="col-sm-9">
+																		<input id="rehead_pwd" class="form-control" type="password" name="rehead_pwd"
+																			placeholder="确认密码" ng-model="headPwd.repwd">
+																		<span class="help-block m-b-none"></span>
+
+																	</div>																	
+																</div>														
+																
+
+															</div>
+														</form>
+														<!-- 表单布局结束 -->												
+
+
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-white"
+														data-dismiss="modal">关闭</button>
+													<button type="button" class="btn btn-primary"
+														ng-click="savePwd()">保存</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- 模态窗口结束 -->                        
+			                            
+            
+            <div class="row">
+            
+            <!-- 内容部分 -->
+            <div class="row wrapper border-bottom white-bg page-heading" style="padding:10px;margin-left:0px;">
+                <div class="col-lg-10">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.jsp">主页</a>
+                        </li>
+                        
+                    </ol>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+            
+                <div class="col-lg-12"><!-- start col-lg-12 -->                    
+                    
+                                        
+                    <div class="wrapper wrapper-content">
+                        <div class="row"><!-- start row -->
+                        
+                            <div class="col-lg-4">
+                                
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>最新通知</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <ol>
+                                           <li ng-repeat="notice in notices"><a href="#" ng-click="showNotice(notice)">{{notice.ntitle}}</a></li>                                            
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div> 
+                            
+                            <div class="col-lg-4">
+                                
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>最新下载</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <ol>
+                                            <li ng-repeat="download in downloads"><a href="#" ng-click="showDownload(download)">{{download.dltitle}}</a></li> 
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>                      
+                            
+                            <!--  工作流开始  -->
+                             
+                            <div class="col-lg-4">
+                                
+                               <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>当前工作流进度</h5>                                        
+                                    </div> 
+                                    
+                                    <div class="ibox-content ibox-heading">
+                                        <h3>{{departmentworkflowSelect.wname}}</h3>                                        
+                                    </div>
+                                    
+                                                                       
+                                    <div class="ibox-content timeline">
+
+                                        
+                                        <div class="timeline-item" ng-repeat="item in wcontentSelect">
+                                            <div class="row">
+                                                <div class="col-xs-3 date">
+                                                    <i class="fa fa-file-text"></i>
+                                                                                                                                        序号：{{item.no}}
+                                                    <br/>
+                                                    <small class="text-navy"></small>
+                                                </div>
+                                                <div class="col-xs-7 content" ng-class="{'text-success':wtoday>item.starttime && wtoday>item.endtime,'text-warning':wtoday>=item.starttime && wtoday<=item.endtime ,'text-info':(wtoday < item.starttime) && (wtoday < item.endtime)}" >
+                                                    <p class="m-b-xs"><strong>{{item.itemname}}{{wtoday>item.starttime && wtoday>item.endtime?"（已完成）":(wtoday>=item.starttime && wtoday<=item.endtime?"（进行中）":"（未开始）")}}</strong>
+                                                    </p>
+                                                    <p>时间：{{item.starttime}} 至  {{item.endtime}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <!--  
+                                        <div class="timeline-item">
+                                            <div class="row">
+                                                <div class="col-xs-3 date">
+                                                    <i class="fa fa-file-text"></i>
+                                                                                                                                        序号：2
+                                                    <br/>
+                                                    <small class="text-navy"></small>
+                                                </div>
+                                                <div class="col-xs-7 content text-warning">
+                                                    <p class="m-b-xs"><strong>申报题目</strong>
+                                                    </p>
+                                                    <p >时间：2016-09-03 00:00 至  2016-09-04 00:00</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        -->
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!--  工作流结束 -->
+                            
+                         </div><!-- end row -->
+                            
+                    </div>
+                    
+                
+                </div><!-- end col-lg-12 --> 
+                
+                
+                <!-- 通知模态窗口 -->
+									<div class="modal fade" data-backdrop="static" id="noticeModal"
+										tabindex="-1" role="dialog" aria-hidden="true">
+										<div class="modal-dialog modal-lg">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">
+														<span aria-hidden="true">&times;</span><span
+															class="sr-only">Close</span>
+													</button>
+													<h2 class="modal-title">通知详情</h2>
+												</div>
+												<div class="modal-body">
+													<div class="row">
+
+														<!-- 表单布局 -->
+														<form id="noticeForm">
+															<div class="col-md-12">
+																<div class="form-group">
+																	<label class="col-sm-2 control-label">通知标题：</label>
+																	<div class="col-sm-10">
+																		<h4>{{notice.ntitle}}</h4>
+
+																	</div>
+																</div>
+																<div class="form-group">
+																	<label class="col-sm-2 control-label">通知内容：</label>
+													 			    <div class="col-sm-10">		
+																	
+																		<p ng-bind-html="notice.ncontent | trusted"></p>
+																	</div>
+																</div>
+
+																<div class="form-group">
+																	<label class="col-sm-2 control-label">附件下载：</label>
+																	<div class="col-sm-10">
+																		<div class="ibox">
+																			<ul class="list-group">
+																				<li class="list-group-item" ng-repeat="file in noticeFiles">
+																				    <div class="row">
+																					  <div class="col-sm-9"><a href="/thesisadmin{{file.url}}" target="_blank">{{file.name}}</a></div>																					  
+																					</div>
+																				</li>
+																			</ul>
+																		</div>
+																	</div>
+																</div>
+
+
+
+															</div>
+
+														</form>
+														<!-- 表单布局结束 -->
+
+
+
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-white"
+														data-dismiss="modal">关闭</button>
+													
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- 通知模态窗口结束 -->
+									
+									
+									<!-- 模态窗口 -->
+                                        <div class="modal fade" data-backdrop="static" id="downloadModal" tabindex="-1" role="dialog"  aria-hidden="true">
+			                                <div class="modal-dialog modal-lg">
+			                                    <div class="modal-content">
+			                                        <div class="modal-header">
+			                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			                                            <h2 class="modal-title">下载详情</h2>
+			                                        </div>
+			                                        <div class="modal-body">			                                            
+			                                            <div class="row">			                                            
+			                                            
+			                                                <!-- 表单布局 -->
+			                                                <form id="downloadForm">
+			                                                <div class="col-md-12">
+														    <div class="form-group">
+														        <label class="col-sm-2 control-label">下载标题：</label>
+														        <div class="col-sm-10">														            
+														            <h4>{{download.dltitle}}</h4>
+														        </div>
+														    </div>
+														    
+														    <div class="form-group">
+																<label class="col-sm-2 control-label">下载内容：</label>
+																<div class="col-sm-10">
+																	<p ng-bind-html="download.dlcontent | trusted"></p>
+																</div>
+															</div>
+															
+															<div class="form-group">
+															<label class="col-sm-2 control-label">附件下载：</label>
+															<div class="col-sm-10">
+																<div class="ibox">
+																	<ul class="list-group">
+																		<li class="list-group-item" ng-repeat="file in downloadFiles">
+																		    <div class="row">
+																			  <div class="col-sm-9"><a href="/thesisadmin{{file.url}}" target="_blank">{{file.name}}</a></div>
+																			 
+																			</div>
+																		</li>
+																	</ul>
+																</div>
+															</div>
+														    </div>														    
+														    
+														</div>												
+
+														
+														</form>													
+														<!-- 表单布局结束 -->
+														
+														
+														
+			                                            </div>			                                            
+			                                        </div>			
+			                                        <div class="modal-footer">
+			                                            <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+			                                         
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                            <!-- 下载模态窗口结束 -->
+									
+									
+                                        
+
+
+                </div>
+                <!-- 底部信息 -->
+                
+<div class="footer">
+                    <div>
+                        <strong>Copyright</strong>  &copy; 2016,最后更新：2016.11.20 18:58:00
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    
+    
+
+
+<!-- Mainly scripts -->
+    <script src="/thesisadmin/jslib/jquery-2.1.1.min.js"></script>
+    <script src="/thesisadmin/jslib/bootstrap.min.js?v=3.4.0"></script>
+    <script src="/thesisadmin/jslib/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/thesisadmin/jslib/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    
+    <script src="/thesisadmin/jslib/plugins/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="/thesisadmin/jslib/plugins/jquery-validation-1.14.0/dist/localization/messages_zh.min.js"></script>
+    <script src="/thesisadmin/jslib/plugins/datatables-1.10.9/media/js/jquery.dataTables.min.js"></script>
+    <script src="/thesisadmin/jslib/plugins/datatables-1.10.9/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+    
+
+    <!-- Custom and plugin javascript -->
+    <script src="/thesisadmin/jslib/hplus.js?v=2.2.0"></script>
+    <script src="/thesisadmin/jslib/plugins/pace/pace.min.js"></script>
+    <script type="text/javascript">
+    //解决ng-file-upload进度条问题
+    XMLHttpRequest.prototype = Object.getPrototypeOf(new XMLHttpRequest);
+    </script>
+    
+    <script src="/thesisadmin/jslib/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/thesisadmin/jslib/plugins/toastr-master/build/toastr.min.js"></script>
+    <!-- jQuery Validation plugin javascript-->
+    <script src="/thesisadmin/jslib/plugins/validate/jquery.validate.min.js"></script>
+    <script src="/thesisadmin/jslib/plugins/validate/messages_zh.min.js"></script>
+    
+    <!--
+    <script src="/thesisadmin/jslib/plugins/bootstrapvalidator-master/dist/js/bootstrapValidator.min.js"></script>
+    <script src="/thesisadmin/jslib/plugins/bootstrapvalidator-master/dist/js/language/zh_CN.js"></script>
+     -->
+    
+    <!-- Angularjs Base -->
+    <script src="/thesisadmin/jslib/plugins/ngfileupload/ng-file-upload-shim.min.js"></script>
+    <script src="/thesisadmin/jslib/angular/angular.min.js"></script>
+    <script src="/thesisadmin/jslib/plugins/angular-cookies.min.js"></script>
+    <script src="/thesisadmin/jslib/ui-bootstrap-tpls-0.13.3.min.js"></script>
+    <script src="/thesisadmin/jslib/plugins/ngfileupload/ng-file-upload.min.js"></script>
+    <script src="/thesisadmin/jslib/app/app.js"></script>
+    <script src="/thesisadmin/jslib/app/directive.js"></script>
+    <script src="/thesisadmin/jslib/app/filter.js"></script>
+    <script src="/thesisadmin/jslib/app/controller/menuController.js"></script>
+    <script src="/thesisadmin/jslib/app/service/menuService.js"></script>
+    <script src="/thesisadmin/jslib/app/controller/headController.js"></script>
+    <script src="/thesisadmin/jslib/app/service/loginService.js"></script>
+    <script src="/thesisadmin/jslib/app/service/studentService.js"></script>
+	<script src="/thesisadmin/jslib/app/service/teacherService.js"></script>
+	<script src="/thesisadmin/jslib/app/service/systemuserService.js"></script>
+	<script src="/thesisadmin/jslib/app/service/departmentworkflowService.js"></script>
+
+    <!-- Angularjs Custom -->
+    <script src="/thesisadmin/jslib/app/service/collegeService.js"></script>
+    <script src="/thesisadmin/jslib/app/service/departmentService.js"></script>
+    <script src="/thesisadmin/jslib/app/controller/indexController.js"></script>
+    <script src="/thesisadmin/jslib/app/service/noticeService.js"></script>
+    <script src="/thesisadmin/jslib/app/service/downloadService.js"></script>
+    <script src="/thesisadmin/jslib/app/service/departmentworkflowService.js"></script>
+</body>
+
+</html>
