@@ -74,11 +74,13 @@ function get_programs_fun(  curPage){
     $("#questionlist tr:not(:first)").remove();
 	var chapterId = $("#chapter").val();
 	 var courseId = $("#course").val();
+	 var programType = $("#programType").val();
  
 	 var args={"courseId": courseId,
 			 "chapterId":chapterId,
 			 "curPage":curPage,
 			 'pageSize':pageSizet,
+			 'programType':programType,
 			 "time":new Date()
 	          };
 	  
@@ -94,8 +96,9 @@ function get_programs_fun(  curPage){
 			  var chapterName = (data.list)[i].chapterName;
 				 var title =  (data.list)[i].title;
 				 var programProblemId =  (data.list)[i].programProblemId;
-				 var tr="<tr><td>"+chapterName+"</td>"
+				 var tr="<tr><td>"+programProblemId+"</td>"
 				 +"<td>"+title+"</td>"
+				 +"<td>"+chapterName+"</td>"
 				 +"<td> <button class='btn btn-default' onclick='operation_program(this.value)' value='"+programProblemId+"'> 查看</button></td>"
 				 +"<td> <button class='btn btn-default' onclick='edit_testdata(this.value)' value='"+programProblemId+"'> 测试数据</button></td>"
 				 // +"<td><a href='./admin/question/AdminCourse.jsp' data-toggle='modal' data-target='#openEditProgramDialog'>打开对话框</a> </td>"
@@ -165,8 +168,15 @@ jQuery(document).ready(function() {
 $("#chapter").change( function(){
 		
 		ctrPage=1; get_programs_fun(curPageT);});
+$("#programType").change( function(){
+	
+	ctrPage=1; get_programs_fun(curPageT);});
+
 	
 });
+
+
+
 
 function delete_program(programProblemId  ){
 	 
@@ -196,9 +206,9 @@ function operation_program(programProblemId){
 	$("#programsSourceText").val(program.scource);
 	$("#spendTime_text").val(program.spendTime); 
 	$("#programsAnswerText").val(program.answer);
-	$("#saveProgramBtn").val(program.programProblemId);
-	
-	//	$("#courseId").val(program.courseId);
+	$("#saveProgramBtn").val(program.programProblemId);	//	$("#courseId").val(program.courseId);
+	//editModalProgramType
+	$("#editModalProgramType").val(program.programType);	
 	//alert(program);
 	//$("modal-body").append("hhhhh");
  //	$("modal-body").load("./admin/question/question_new.jsp");
@@ -223,6 +233,7 @@ function save_program(programProblemId){
 		 "programsContext":$("#programsContextText").val() ,
 		 "languageId":$("#languageId").val(),
 		 "answer":$("#programsAnswerText").val(),
+		 "programType":$("#editModalProgramType").val(), 
 		 "time":new Date()}
 	 
 	 $.post(url,args,function(data){
@@ -354,12 +365,16 @@ function clickTestDataIdBtn(){//保存测试数据
 				</select>
 			</div>
 			<div class="form-group row col-md-1"></div>
-
-			<div class="form-group row col-md-2">
-				<div>
-					<br>
-				</div>
+	<div class="form-group row col-md-2">
+				<label for="name">类型</label> <select class="form-control"
+					id="programType">
+					<option value="0">所有</option>
+					<option value="1">考试</option>
+					<option value="2">练习</option>
+				</select>
 			</div>
+			
+		
 		</form>
 	</div>
 
@@ -368,16 +383,18 @@ function clickTestDataIdBtn(){//保存测试数据
 			<table class="table table-striped" id="questionlist">
 				<thead>
 					<tr>
-						<th>章节</th>
+						<th>题目ID</th>
 						<th>题目名称</th>
+						<th>章节</th>
 						<th>查看</th>
 						<th>测试数据</th>
 						<th>删除</th>
 					</tr>
 				</thead>
 				<colgroup>
-					<col style="width: 20%">
+					<col style="width: 10%">
 					<col style="width: 50%">
+					<col style="width: 10%">
 					<col style="width: 10%">
 					<col style="width: 10%">
 					<col style="width: 10%">
@@ -430,6 +447,11 @@ function clickTestDataIdBtn(){//保存测试数据
 									class="form-control" id="languageId" name="language">
 									<option value="1">C++</option>
 									<option value="2">JAVA</option>
+								</select>
+								<span class="input-group-addon">题目类型</span> <select
+									class="form-control" id="editModalProgramType" name="editModalProgramType">
+									<option value="0">考试</option>
+									<option value="1">练习</option>
 								</select>
 							</div>
 							<br>
