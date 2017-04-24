@@ -11,6 +11,7 @@ public class ProgramProblem {
 	String scource;// 
 	int spendTime;// 
 	int languageId;
+	int programType;
 	
 	// 
 	List<TestData> testDataList;
@@ -95,6 +96,14 @@ public class ProgramProblem {
 	}
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+	
+	
+	public int getProgramType() {
+		return programType;
+	}
+	public void setProgramType(int programType) {
+		this.programType = programType;
 	}
 	@Override
 	public String toString() {

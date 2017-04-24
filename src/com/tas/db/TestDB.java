@@ -27,7 +27,7 @@ public class TestDB {
 
 			Connection dbConn = DriverManager.getConnection(dbURL, userName, userPwd);
 
-			System.out.println("Á¬½ÓÊý¾Ý¿â³É¹¦");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 
 		}
 
@@ -37,7 +37,7 @@ public class TestDB {
 
 			e.printStackTrace();
 
-			System.out.print("Á¬½ÓÊ§°Ü");
+			System.out.print("ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 
 		}
 */

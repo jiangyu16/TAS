@@ -48,58 +48,64 @@ public class QuestionServlet extends HttpServlet {
 		if(actionName.equals("get_programs")){
 			int courseId= Integer.parseInt(request.getParameter("courseId"));
 			int chapterId=Integer.parseInt(request.getParameter("chapterId"));
+			int programType=Integer.parseInt(request.getParameter("programType"));
 			int curPage = Integer.parseInt(request.getParameter("curPage"));
 			int pageSize = Integer.parseInt(request.getParameter("pageSize"));
+			
 			ProgramProblemService pps = new ProgramProblemServiceImpl();
 			
 			
 			 List<ProgramProblem> ppls= new ArrayList<ProgramProblem>();
-			 QuestionDao ppd= new QuestionDaoImpl();
-			if(chapterId==0){
-				PageControl<ProgramProblem> pc = pps.getProgramProblemByLanguage(courseId, curPage, pageSize);
-				System.out.println(courseId+" "+curPage+" "+ pageSize);
-				// ppls =ppd.getProgramProblemByLanguage(courseId, 0, 10);
-				ObjectMapper mapper=new ObjectMapper();
-				String result= mapper.writeValueAsString(pc);
-				  System.out.println(result);
-				response.setContentType("text/javascript");
-				response.setCharacterEncoding("utf-8");
-				
-				response.getWriter().print(result); 
-			}else { 
-				PageControl<ProgramProblem> pc = pps.getProgramProblemByCourseAndChapter(courseId, chapterId, curPage, pageSize);
-				System.out.println(courseId+" "+curPage+" "+ pageSize);
-				// ppls =ppd.getProgramProblemByLanguage(courseId, 0, 10);
-				ObjectMapper mapper=new ObjectMapper();
-				String result= mapper.writeValueAsString(pc);
-				  System.out.println(result);
-				response.setContentType("text/javascript");
-				response.setCharacterEncoding("utf-8");
-				
-				response.getWriter().print(result); 
-			}
+			// QuestionDao ppd= new QuestionDaoImpl();
+			 PageControl<ProgramProblem> pc ;
+			 pc = pps.getProgramProblem(courseId, chapterId, curPage, pageSize, programType);
+//			if(chapterId==0){//所有的题目，不分章节
+//				if( programType==0)
+//				  pc = pps.getProgramProblemByLanguage(courseId, curPage, pageSize);
+//				else  pc = pps.getProgramProblemByLanguage(courseId, curPage, pageSize,programType);//还要按题目类型查询，题目类型是指考试或练习
+//				
+//			}else { //按章节检索
+//				if( programType==0) 
+//				pc = pps.getProgramProblemByCourseAndChapter(courseId, chapterId, curPage, pageSize);
+//				else  pc = pps.getProgramProblemByCourseAndChapter(courseId, chapterId, curPage, pageSize,programType);//还要按题目类型查询，题目类型是指考试或练习
+//			}
+			
+			System.out.println(courseId+" "+curPage+" "+ pageSize);
+			// ppls =ppd.getProgramProblemByLanguage(courseId, 0, 10);
+			ObjectMapper mapper=new ObjectMapper();
+			String result= mapper.writeValueAsString(pc);
+			  System.out.println(result+"abc");
+			response.setContentType("text/javascript");
+			response.setCharacterEncoding("utf-8");
+			
+			response.getWriter().print(result); 
+			
 		}else if(actionName.equals("save_program")){
 			int programProblemId =-1;
 			if(request.getParameter("programProblemId")==null);
 			else programProblemId=Integer.parseInt(request.getParameter("programProblemId"));
 			int courseId=Integer.parseInt(request.getParameter("courseId"));
 			int chapterId =Integer.parseInt(request.getParameter("chapterId"));
-			System.out.println(chapterId+"   eeeee");
+		//	System.out.println(chapterId+"   eeeee");
 			int languageId = Integer.parseInt(request.getParameter("languageId"));
 			String title = request.getParameter("programsTitle");
 			String text = request.getParameter("programsContext");
 			String scource = request.getParameter("programsSource");
 			String answer = request.getParameter("answer");
+			int programType=Integer.parseInt(request.getParameter("programType"));
+			System.out.println(programType+"  wewe");
 			int spendTime = Integer.parseInt(request.getParameter("spendTime"));
 			ProgramProblem pp = new ProgramProblem();
 			pp.setCourseId(courseId);pp.setChapterId(chapterId);pp.setText(text);pp.setTitle(title);
 			pp.setSpendTime(spendTime);pp.setScource(scource);pp.setLanguageId(languageId);
 			pp.setAnswer(answer);
+			pp.setProgramType(programType);
+			
 			pp.setProgramProblemId(programProblemId);
 			ProgramProblemService pps = new ProgramProblemServiceImpl();
 			
 			int result =pps.saveProgramProblem(pp);
-			 System.out.println(result);
+			// System.out.println(result);
 			response.setContentType("text/javascript");
 			response.setCharacterEncoding("utf-8");
 			
