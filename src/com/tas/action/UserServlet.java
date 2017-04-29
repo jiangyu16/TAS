@@ -43,6 +43,7 @@ public class UserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+	
 		System.out.println(getRemoteHost(request));
 		response.setContentType("text/html;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -66,14 +67,17 @@ public class UserServlet extends HttpServlet {
 					request.getSession().setAttribute("msg", "login failed, please input username and password again！");
 					response.sendRedirect("login.jsp"); 
 				}else {
+					request.setCharacterEncoding("UTF-8");
 					request.getSession().setAttribute("user", teacher);
 					response.sendRedirect("UserServlet?action=index");
 				}
 			}
 		}
 		if(action.equals("index")){
-		//	request.getRequestDispatcher("/AdminMain.jsp").forward(request, response);
-			 response.sendRedirect("admin/AdminMain.jsp");
+			request.setCharacterEncoding("UTF-8");
+			request.setAttribute("testd", "不知道");
+			request.getRequestDispatcher("admin/AdminMain.jsp").forward(request, response);
+			// response.sendRedirect("admin/AdminMain.jsp");
 		}
 		
 	}

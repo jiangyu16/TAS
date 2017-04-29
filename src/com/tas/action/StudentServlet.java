@@ -54,6 +54,7 @@ public class StudentServlet extends HttpServlet {
 
 			ObjectMapper mapper = new ObjectMapper();
 			String result = mapper.writeValueAsString(studentPc);
+			 
 			response.setContentType("text/javascript");
 			response.setCharacterEncoding("utf-8");
 

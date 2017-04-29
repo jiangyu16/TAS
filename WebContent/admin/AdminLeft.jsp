@@ -144,7 +144,7 @@
 				<div class="panel-heading" id="collapseListGroupHeading2"
 					data-toggle="collapse" data-target="#collapseListGroup2" role="tab">
 					<h4 class="panel-title">
-						学生管理 <span class="glyphicon glyphicon-chevron-down right"></span>
+						班级管理<span class="glyphicon glyphicon-chevron-down right"></span>
 					</h4>
 				</div>
 				<div id="collapseListGroup2" class="panel-collapse collapse"

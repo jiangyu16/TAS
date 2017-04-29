@@ -99,10 +99,11 @@ function get_classes_fun(curPage){
 		chapterArray=data.list;
 		  for(var i=0;i<(data.list).length;i++){
 			  var classId = (data.list)[i].classId;
-				 var className =  (data.list)[i].className;
+				 var className1 =  (data.list)[i].className;
 				 var tr="<tr><td>"+classId+"</td>"
-				 +"<td>"+className+"</td>"
-				 +"<td> <button class='btn btn-default' onclick='redirect_class_student(this.value)' value='"+classId+"'> 查看学生</button></td>"
+				 +"<td>"+className1+"</td>"
+				 +"<td> <button class='btn btn-default' onclick='redirect_class_student("+classId+",this.value)' value='"+className1+"'> 查看学生</button></td>"
+				// +"<td> <button class='btn btn-default' onclick='redirect_class_student(this.value)' value='"+classId+"'> 查看学生</button></td>"
 				 +"<td> <button class='btn btn-default' onclick='show_update_chapter_modal(this.value)' value='"+classId+"'> 修改数据</button></td>"
 				 +"<td> <button class='btn btn-default' onclick='delete_chapter(this.value)' value='"+classId+"'> 删除数据</button></td></tr>";
 				 // +"<td><a href='./admin/question/AdminCourse.jsp' data-toggle='modal' data-target='#openEditProgramDialog'>打开对话框</a> </td>"
@@ -123,8 +124,11 @@ function get_classes_fun(curPage){
 	 });
 	 
 }
-function redirect_class_student(classId){
-	$("#questionlist").load("./admin/student/student_list.jsp?classId="+classId);
+function redirect_class_student(classId,className){
+	
+	// alert(className);
+	$("#questionlist").empty();
+	$("#questionlist").load("./admin/student/student_list.jsp?classId="+classId+"&className="+className);
 }
 function show_update_chapter_modal(chapterId){
 	update_chapterId=chapterId;
@@ -198,7 +202,8 @@ function search_class (curPage){
 				 var className =  (data.list)[i].className;
 				 var tr="<tr><td>"+classId+"</td>"
 				 +"<td>"+className+"</td>"
-				 +"<td> <button class='btn btn-default' onclick='redirect_class_student(this.value)' value='"+classId+"'> 查看学生</button></td>"
+				 +"<td> <button class='btn btn-default' onclick='redirect_class_student("+classId+",this.value)' value='"+className+"'> 查看学生</button></td>"
+				// +"<td> <button class='btn btn-default' onclick='redirect_class_student(this.value)' value='"+classId+"'> 查看学生</button></td>"
 				 +"<td> <button class='btn btn-default' onclick='show_update_chapter_modal(this.value)' value='"+classId+"'> 修改名称</button></td>"
 				 +"<td> <button class='btn btn-default' onclick='delete_chapter(this.value)' value='"+classId+"'> 删除班级</button></td></tr>";
 				 // +"<td><a href='./admin/question/AdminCourse.jsp' data-toggle='modal' data-target='#openEditProgramDialog'>打开对话框</a> </td>"

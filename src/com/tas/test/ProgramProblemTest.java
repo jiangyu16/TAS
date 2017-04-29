@@ -13,8 +13,8 @@ public class ProgramProblemTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		QuestionDao ppd= new QuestionDaoImpl();
-		int i=ppd.getAllProgramProblem(2);
-		System.out.println(i);
+		//int i=ppd.getAllProgramProblem(2);
+		//System.out.println(i);
 //		List<ProgramProblem> list =  ppd.getProgramProblemByLanguage(1,2,2);
 //		Iterator<ProgramProblem> it= list.iterator();
 //		while(it.hasNext()){

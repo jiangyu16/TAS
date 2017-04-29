@@ -8,7 +8,7 @@
  <%
  
  String ss= ((Teacher)session.getAttribute("user")).getTeacherId();
-
+  
 %>
 
 <!DOCTYPE html>
@@ -30,7 +30,19 @@
       
    
      </script>
+     
+     
 </head>
+
+  <script type="text/javascript">
+//  jQuery(document).ready(function() {
+//		var ss=<%=ss %>;
+	//	alert(ss);
+	//});
+ // jQuery(document).ready(function() { alert(e);});
+  </script>
+  
+  
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
      <div class="container">
@@ -65,11 +77,12 @@
  </div>
 </div>
 
- 
+ <!-- 
 	${sessionScope.user.teacherId }	
 	
 	<%=ss %>
-
+     <%=request.getAttribute("testd") %>
+      -->
 </body>
-  
+
 </html>

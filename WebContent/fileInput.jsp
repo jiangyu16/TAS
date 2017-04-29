@@ -46,6 +46,9 @@
 									class="file-loading" />
 							</div>
 						</div>
+						</div>
+						</div>
+						
 			</form>
 </body>
 </html>
@@ -64,7 +67,7 @@
 		//初始化fileinput控件（第一次初始化）
 		oFile.Init = function(ctrlName, uploadUrl) {
 			var control = $('#' + ctrlName);
-
+		 
 			//初始化上传控件的样式
 			control.fileinput({
 				language : 'zh', //设置语言
