@@ -129,7 +129,7 @@ public class StudentDaoImpl implements StudentDao {
 		String sql = "SET NOCOUNT ON insert into t_student values(?,?,?,?,?)";
 		try {
 			dbpool.doUpdate(sql, new Object[]{student.getStudentId()
-					,"123456",student.getStuName(),student.getClassId(),student.getLastLoginIp()});
+					,student.getStudentId(),student.getStuName(),student.getClassId(),student.getLastLoginIp()});
 			System.out.println("insert success ");
 		} catch (SQLException e) {
 			System.out.println("isert failed");
