@@ -164,7 +164,7 @@ public class FileInputServlet extends HttpServlet {
 				}
 			}
 			studentServiceImpl.addExcelData(stuList);
-			System.out.println(stuList);
+			//System.out.println(stuList);
 			//studentservice.addExcelData(stuList);
 		}
 	}

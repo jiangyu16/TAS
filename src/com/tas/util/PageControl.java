@@ -57,6 +57,13 @@ public class PageControl <T>{
 	public void setList(List<T> list) {
 		this.list = list;
 	}
-	
+
+
+	public int getTotalRows() {
+		return totalRows;
+	}
+
+
+	 
 	
 }

@@ -21,7 +21,7 @@ public class StudentServiceImpl implements StudentService{
 		int fail;//失败的数量
 		while(iter.hasNext()){
 			Student student=(Student) iter.next();
-			System.out.println(student);
+		//	System.out.println(student);
 			studentdao=new StudentDaoImpl();
 			//先查询该id是否已存在,若不存在将student插入
 			System.out.println("正在插入...............");
