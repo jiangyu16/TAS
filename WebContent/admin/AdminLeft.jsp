@@ -206,6 +206,27 @@
 					</ul>
 				</div>
 			</div>
+			
+			<!-- paper下拉菜单栏开始 -->
+						<div class="panel panel-primary leftMenu">
+				<div class="panel-heading" id="collapseListGroupHeading3"
+					data-toggle="collapse" data-target="#collapseListGroup4" role="tab">
+					<h4 class="panel-title">
+						Paper管理<span class="glyphicon glyphicon-chevron-down right"></span>
+					</h4>
+				</div>
+				<div id="collapseListGroup4" class="panel-collapse collapse"
+					role="tabpanel" aria-labelledby="collapseListGroupHeading3">
+					<ul class="list-group">
+						<li class="list-group-item">
+							<button class="menu-item-left" onclick="get_paper_page()">
+								<span class="glyphicon glyphicon-triangle-right"></span>查询Paper
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- paper下拉菜单栏结束 -->
 		</div>
 
 
@@ -238,6 +259,10 @@
 		function admin_class_page(){
 			//alert("eeeee");
 			$("#questionlist").load("./admin/student/AdminClass.jsp");
+		}
+		function get_paper_page(){
+			//alert("eeeee");
+			$("#questionlist").load("./admin/paper/paperList.jsp");
 		}
 	</script>
 </body>
