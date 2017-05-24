@@ -27,9 +27,9 @@ String examInfoId= request.getParameter("examInfoId")  ;
 </head>
 <body>
 
-<%=basePath%>
+<%=examInfoId%>
  <div class="row col-md-1" ></div>
-<div class="row col-xs-2  col-md-1">
+<div class="row col-xs-2  col-md-2">
 <div></div>
  <jsp:include page="../frame/AdminLeft.jsp"></jsp:include>
             
@@ -40,10 +40,11 @@ String examInfoId= request.getParameter("examInfoId")  ;
  <div ng-app="myApp" ng-controller="siteCtrl"> 
  <div class="container">
 		<form class="bs-example bs-example-form" role="form" action="ExamInfoServlet?action=saveExamInfo" method="post">
+			<input type='hidden'  ng-model='examInfoId' value='{{examInfoId}}' name='examInfoId'>
 			<div class="input-group">
 				<span class="input-group-addon">paper编号</span>
 				 <input type="text"
-					class="form-control" ng-model="examInfoId" name="examInfoId">
+					class="form-control" ng-model="paperId" name="paperId">
 			</div>
 			
 			<div class="input-group">
@@ -90,7 +91,7 @@ String examInfoId= request.getParameter("examInfoId")  ;
  </div>
  
 <br>
- 
+
  </div>
 
 
@@ -98,7 +99,7 @@ String examInfoId= request.getParameter("examInfoId")  ;
 </body>
 <script type="text/javascript">
 var examInfoId=<%=examInfoId%>;
-examInfoId=8;
+//examInfoId=8;
 var app = angular.module('myApp', []);
 app.controller('siteCtrl', function($scope, $http) {
 	if(examInfoId!=null){	//修改考试	 ,先获取数据
@@ -119,6 +120,7 @@ app.controller('siteCtrl', function($scope, $http) {
 				$scope.endTime =response.data.endTime;
 				$scope.programScore =response.data.programScore;
 				$scope.choiceScore =response.data.choiceScore;
+				//alert($scope.examInfoId );
 			},function(error){
 				//alert("ee");
 			});

@@ -49,12 +49,20 @@ public class ExamInfoServlet extends HttpServlet {
 			response.getWriter().print(result); 
 			System.out.println(result);
 		}else if(actionName.equals("getExamAllInfos")){
-			
-			PageControl<ExamInfo> pc = new ExamInfoServiceImpl().getgetExamAllInfos(request);
+			request.getSession().setAttribute("testsession", "ts");//用来测试session能否跟随页面跳转
+			PageControl<ExamInfo> pc = new ExamInfoServiceImpl().getAllExamInfos(request);
 			ObjectMapper mapper=new ObjectMapper();
 			String result= mapper.writeValueAsString(pc );
 			response.setContentType("text/javascript");
 			response.setCharacterEncoding("utf-8");
+			System.out.println(result);
+			response.getWriter().print(result); 
+		}else if(actionName.equals("deleteExamInfoById")){
+			int examInfoId = Integer.parseInt(request.getParameter("examInfoId"));
+			int result = new ExamInfoServiceImpl().deleteExamInfoById(examInfoId);
+			response.setContentType("text/javascript");
+			response.setCharacterEncoding("utf-8");
+			System.out.println(result);
 			response.getWriter().print(result); 
 		}
 	}
@@ -69,8 +77,10 @@ public class ExamInfoServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 	//	System.out.println(request.getParameter("examName"));
 		String actionName=request.getParameter("action");
+		System.out.println(actionName);
 		if(actionName.equals("saveExamInfo"))	{
 			int result= new ExamInfoServiceImpl().saveExamInfo(request);	
+			System.out.println(result);
 			 request.getRequestDispatcher("/admin/exam/examInfoList.jsp").forward(request, response);
 		}
 	}

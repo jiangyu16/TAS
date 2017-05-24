@@ -10,4 +10,5 @@ public interface ExamInfoDao {
     public List<ExamInfo> getAllExamInfos(int curPage, int pageSize);
     public int getAllExamInfosNum();
     public ExamInfo  get_ExamInfoById(int examInfoId);
+    public int deleteExamInfoById(int examInfoId);
 }
