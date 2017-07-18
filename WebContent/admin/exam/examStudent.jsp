@@ -215,6 +215,29 @@ var examStudentpageSize=12;
 				});
 		};
 		
+		$scope.examStudentListPrevious= function(){
+			
+			examStudentcurPage=examStudentcurPage-1;
+			if(examStudentcurPage==0){examStudentcurPage=1;}
+			else{
+				 
+				$scope.selectExamStudentPage(examStudentcurPage);
+				
+			}
+				
+			};
+			$scope.examStudentListNext= function(){
+				
+				examStudentcurPage=examStudentcurPage+1;
+				if(examStudentcurPage==$scope.estotalPages+1){examStudentcurPage--;}
+				else{
+					 
+					$scope.selectExamStudentPage(examStudentcurPage);//调用下面的selectPage函数
+					
+				}
+					
+				};
+		
 		$scope.selectClassPage(1);
 		$scope.selectExamStudentPage(1);
 		$scope.addAllStudentsToExam=function(classId){

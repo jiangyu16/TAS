@@ -20,7 +20,7 @@ public class PaperDaoImpl implements PaperDao {
 		List <Paper> paperList =new ArrayList <Paper>();
 		String sql;
 		//拼装sql语句
-		sql="select * from T_paper where 1=1 ";
+		sql="select *,ROW_NUMBER() OVER(ORDER BY [paperId] asc) AS num  from T_paper where 1=1 ";
 		if(paper.getCourseId()!=0){
 			sql+=" and courseId = " +paper.getCourseId();
 		}
@@ -91,6 +91,40 @@ public class PaperDaoImpl implements PaperDao {
 		}
 		
 		return paperList.size();
+	}
+
+	@Override
+	public int updatePaper(Paper paper) {
+		// TODO Auto-generated method stub
+		DBPool dbpool= new DBPool();
+		String sql="UPDATE [dbo].[T_Paper]  SET [paperName] =?,"
+				+ "[programScore] =?,"
+				+ "[choiceScore] = ?,"
+				+ "[teacherId] = ?,"
+				+ "[paperType] = ?,"
+				+ "[isVisable] = ?,"
+				+ "[courseId] = ?"
+				+ " WHERE paperId =? ";
+		int result=0;
+		
+		try {
+			result =dbpool.doUpdate(sql, new Object[]{
+				paper.getPaperName(),
+				paper.getProgramScore(),
+				paper.getChoiceScore(),
+				paper.getTeacherId(),
+				paper.getPaperType(),
+				paper.isVisable(),
+				paper.getCourseId(),
+				paper.getPaperId()
+				
+			});
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 }

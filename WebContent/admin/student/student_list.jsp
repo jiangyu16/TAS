@@ -16,23 +16,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html>
 <head>
-<base href="<%=basePath%>" > 
-<meta charset="UTF-8">
-<title>Insert title here</title>
-	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-   	<link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet">
-    <link href="bootstrap/css/blog-home.css" rel="stylesheet">
-    <link href="bootstrap/bootstrap-fileinput-master/css/fileinput.min.css"
+<base href="<%=basePath%>">
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet">
+<link href="bootstrap/css/blog-home.css" rel="stylesheet">
+  <link href="bootstrap/bootstrap-fileinput-master/css/fileinput.min.css"
 	media="all" rel="stylesheet" type="text/css" />
-	
-    <script src="<%=basePath %>bootstrap/js/jquery-2.1.1.js"></script>
-     <script src="<%=basePath %>bootstrap/js/bootstrap.min.js"></script>
-     
+
+
+<script src="<%=basePath %>bootstrap/js/jquery-2.1.1.js"></script>
+<script src="<%=basePath %>bootstrap/js/bootstrap.min.js"></script>
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/moment.js"></script>
      <!-- 文件上传插件需要导入的文件 -->
 <script
 	src="<%=basePath%>bootstrap/bootstrap-fileinput-master/js/fileinput.min.js"></script>
 <script
 	src="<%=basePath%>bootstrap/bootstrap-fileinput-master/js/fileinput_locale_zh.js"></script>
+		
+	
+<script src="angular/angular.min.js"></script>
+
+
+<meta charset="UTF-8">
+<title>学生列表</title>
+
 </head>
 <!--CourseServlet?action=get_course--> 
 <script type="text/javascript">
@@ -127,12 +140,14 @@ jQuery(document).ready(function() {
 
 
 function delete_student(studentId){
-	alert("删除学生");
+	//alert("删除学生");
 	 
 	var url="StudentServlet?action=del_student";
 	var args={ "studentId":studentId,"time":new Date()};
 	$.post(url,args,function(data){
-		if(data==1)get_students_fun(ctrPage);
+		//alert(data);
+		//if(data==1)
+			get_students_fun(curPage);
 	});
 	
 }
@@ -208,6 +223,14 @@ $(function() {
 <body>
 
 
+	<div class="row col-md-1"></div>
+	<div class="row col-xs-2  col-md-1">
+		<div></div>
+		<jsp:include page="../frame/AdminLeft.jsp"></jsp:include>
+
+	</div>
+	<div class="row col-md-1"></div>
+	<div class="row col-xs-4 col-md-4">
 
 	<div class="container">
 		<form role="form" method="post" onsubmit="return false;">
@@ -276,7 +299,11 @@ $(function() {
 						</div>
 						
 			</form>
-			
+		</div>	
 			
 </body>
+<script type="text/javascript">
+$("#collapseListGroupHeading3").click();
+
+</script>
 </html>

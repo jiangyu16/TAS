@@ -8,10 +8,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html>
 <head>
-<base href="<%=basePath%>" > 
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<base href="<%=basePath%>">
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 
+<script src="<%=basePath %>bootstrap/js/jquery-2.1.1.js"></script>
+<script src="<%=basePath %>bootstrap/js/bootstrap.min.js"></script>
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/moment.js"></script>
+<script src="angular/angular.min.js"></script>
+<meta charset="UTF-8">
+<title>题目列表</title>
+	
 </head>
 <!--CourseServlet?action=get_course--> 
 <script type="text/javascript">
@@ -122,7 +136,7 @@ function get_programs_fun(  curPage){
 jQuery(document).ready(function() {
 	
 	var url="CourseServlet?action=get_course";
-	 var args={"time":new Date()}; 
+	 var args={"time":new Date()}; //json
 	$.getJSON(url, function(data){
 		if(data.length==0){
 			alert("当前系统里没有课程");
@@ -132,6 +146,7 @@ jQuery(document).ready(function() {
 				var courseName=data[i].courseName;
 				$("#course").append("<option value='"+courseId+"'>"+courseName+"</option>");
 				$("#courseId").append("<option value='"+courseId+"'>"+courseName+"</option>");
+				
 			}
 			
 		}
@@ -168,6 +183,7 @@ jQuery(document).ready(function() {
 $("#chapter").change( function(){
 		
 		ctrPage=1; get_programs_fun(curPageT);});
+		
 $("#programType").change( function(){
 	
 	ctrPage=1; get_programs_fun(curPageT);});
@@ -346,6 +362,16 @@ function clickTestDataIdBtn(){//保存测试数据
 }
 </script>
 <body>
+<br> <br>
+	<div class="row col-md-1"></div>
+	<div class="row col-xs-2  col-md-1">
+		<div></div>
+		<jsp:include page="../frame/AdminLeft.jsp"></jsp:include>
+
+	</div>
+	<div class="row col-md-1"></div>
+	<div class="row col-xs-4 col-md-4">
+
 
 	<div class="container">
 		<form role="form">
@@ -355,7 +381,9 @@ function clickTestDataIdBtn(){//保存测试数据
 				<select class="form-control"
 					id="course">
 					<option value="0">未选择</option>
+				
 				</select>
+				
 			</div>
 			<div class="form-group row col-md-1"></div>
 			<div class="form-group row col-md-4">
@@ -571,6 +599,9 @@ function clickTestDataIdBtn(){//保存测试数据
 			<!-- /.modal-content -->
 		</div>
 		<!-- /.modal -->
-	</div>
+	</div></div>
 </body>
+<script type="text/javascript">
+$("#collapseListGroupHeading1").click();
+</script>
 </html>

@@ -18,6 +18,7 @@ import com.tas.dao.impl.CourseDaoImpl;
 
 /**
  * Servlet implementation class CourseServlet
+ * 注解  
  */
 @WebServlet("/CourseServlet")
 public class CourseServlet extends HttpServlet {
@@ -30,7 +31,7 @@ public class CourseServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+// int i=5;  int b=i;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -47,7 +48,7 @@ public class CourseServlet extends HttpServlet {
 			//request.setAttribute("courses", courses);
 			ObjectMapper mapper=new ObjectMapper();
 			String result= mapper.writeValueAsString(courses);
-			//System.out.println(result);
+			System.out.println(result);
 			response.setContentType("text/javascript");
 			response.setCharacterEncoding("utf-8");
 			

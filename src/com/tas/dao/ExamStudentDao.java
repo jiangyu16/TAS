@@ -9,4 +9,5 @@ public interface ExamStudentDao {
 	public List<ExamStudent> getExamStudentsByExamInfoId(String examInfoId,int offset, int fetch);
 	public int getAllExamStudentNum(String examInfoId);
 	public int deleteExamStudent(String examInfoId,String studentId);
+	public int deleteExamStudents(ExamStudent[] examStudents,String examInfoId);//批处理删除
 }

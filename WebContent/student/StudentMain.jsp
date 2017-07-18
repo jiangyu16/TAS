@@ -7,7 +7,7 @@
 %>
  <%
  
- String ss= ((Teacher)session.getAttribute("user")).getTeacherId();
+ //String ss= ((Student)session.getAttribute("user")).getStudentId();
   
 %>
 
@@ -67,7 +67,7 @@
    </nav>
 <div class="container  " style="min-width:1000px" >
 <div class="row col-xs-2 col-md-2" style="min-width:130px">
- <jsp:include page="frame/AdminLeft.jsp"></jsp:include>
+ <jsp:include page="frame/StudentLeft.jsp"></jsp:include>
             
  </div>
  <div class="row col-xs-10 col-md-10" style="min-width:800px">
@@ -80,8 +80,7 @@
  <!-- 
 	${sessionScope.user.teacherId }	
 	
-	<%=ss %>
-     <%=request.getAttribute("testd") %>
+
       -->
 </body>
 

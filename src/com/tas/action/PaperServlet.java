@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
 import com.tas.bean.Paper;
 import com.tas.service.PaperService;
 import com.tas.service.impl.PaperServiceImpl;
@@ -58,12 +60,16 @@ public class PaperServlet extends HttpServlet{
 			//调用Service层的方法
 			paperService = new PaperServiceImpl();
 			System.out.println(tempPaper);
-			PageControl<Paper> p = paperService.getPaperList(tempPaper, curPage, pageSize);
+			PageControl<Paper> pc = paperService.getPaperList(tempPaper, curPage, pageSize);
+			 
+			ObjectMapper mapper=new ObjectMapper();
+			String result= mapper.writeValueAsString(pc);
+			 System.out.println(result);
 			
 			response.setContentType("text/javascript");
 			response.setCharacterEncoding("utf-8");
 			//返回PageControl对象
-			response.getWriter().print(p); 
+			response.getWriter().print(result); 
 		}	
 	
 	}

@@ -67,6 +67,8 @@
 	<div class="row">
 
 		<div class="panel-group table-responsive" role="tablist">
+		
+		<!--题目管理下拉菜单开始-->
 			<div class="panel panel-primary leftMenu">
 				<!-- 利用data-target指定要折叠的分组列表 -->
 				<div class="panel-heading" id="collapseListGroupHeading1"
@@ -82,55 +84,62 @@
 						<li class="list-group-item">
 							<!-- 利用data-target指定URL -->
 						<li class="list-group-item">
-							<button class="menu-item-left" onclick="new_question_page()">
-								<span class="glyphicon glyphicon-triangle-right"></span>新增题目
-							</button>
+							<a href="./admin/question/question_new.jsp" role="button">
+							<span class="glyphicon glyphicon-triangle-right"></span>新增题目</a>
 						</li>
 						<li class="list-group-item">
-							<button class="menu-item-left" onclick="get_question_page()">
-								<span class="glyphicon glyphicon-triangle-right"></span>查询题目
-							</button>
+							<a href="./admin/question/question_list.jsp" role="button">
+							<span class="glyphicon glyphicon-triangle-right"></span>查询题目</a>
 						</li>
 						<li class="list-group-item">
-							<button class="menu-item-left" onclick="admin_course_page()">
-								<span class="glyphicon glyphicon-triangle-right"></span>课程管理
-							</button>
+							<a href="./admin/question/AdminCourse.jsp" role="button">
+							<span class="glyphicon glyphicon-triangle-right"></span>课程管理</a>
 						</li>
-						<li class="list-group-item">
-							<button class="menu-item-left">
-								<span class="glyphicon glyphicon-triangle-right"></span>分组项1-4
-							</button>
-						</li>
-						<li class="list-group-item">
-							<button class="menu-item-left">
-								<span class="glyphicon glyphicon-triangle-right"></span>分组项1-5
-							</button>
-						</li>
-						<li class="list-group-item">
-							<button class="menu-item-left">
-								<span class="glyphicon glyphicon-triangle-right"></span>分组项1-6
-							</button>
-						</li>
+						
 						
 					</ul>
 				</div>
 			</div>
-			<!--panel end-->
-			<div class="panel panel-primary leftMenu">
+			<!--题目管理 end-->
+			
+			
+				<!-- paper下拉菜单栏开始 -->
+						<div class="panel panel-primary leftMenu">
 				<div class="panel-heading" id="collapseListGroupHeading2"
 					data-toggle="collapse" data-target="#collapseListGroup2" role="tab">
 					<h4 class="panel-title">
-						班级管理<span class="glyphicon glyphicon-chevron-down right"></span>
+						Paper管理<span class="glyphicon glyphicon-chevron-down right"></span>
 					</h4>
 				</div>
 				<div id="collapseListGroup2" class="panel-collapse collapse"
 					role="tabpanel" aria-labelledby="collapseListGroupHeading2">
 					<ul class="list-group">
 						<li class="list-group-item">
-							<button class="menu-item-left"  onclick="admin_class_page()">
-								<span class="glyphicon glyphicon-triangle-right" ></span>班级管理
-							</button>
+							<a href="./admin/paper/paperList.jsp" role="button">
+							<span class="glyphicon glyphicon-triangle-right"></span>查询Paper</a>
 						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- paper下拉菜单栏结束 -->
+			
+			
+			<div class="panel panel-primary leftMenu">
+				<div class="panel-heading" id="collapseListGroupHeading3"
+					data-toggle="collapse" data-target="#collapseListGroup3" role="tab">
+					<h4 class="panel-title">
+						班级管理<span class="glyphicon glyphicon-chevron-down right"></span>
+					</h4>
+				</div>
+				<div id="collapseListGroup3" class="panel-collapse collapse"
+					role="tabpanel" aria-labelledby="collapseListGroupHeading3">
+					<ul class="list-group">
+						<li class="list-group-item">
+							<li class="list-group-item">
+							<a href="./admin/student/AdminClass.jsp" role="button">
+							<span class="glyphicon glyphicon-triangle-right"></span>班级管理</a>
+						</li>
+						
 						<li class="list-group-item">
 							<button class="menu-item-left">
 								<span class="glyphicon glyphicon-triangle-right"></span>分组项2-2
@@ -149,15 +158,51 @@
 					</ul>
 				</div>
 			</div>
+			
+			
 			<div class="panel panel-primary leftMenu">
-				<div class="panel-heading" id="collapseListGroupHeading2"
-					data-toggle="collapse" data-target="#collapseListGroup3" role="tab">
+				<div class="panel-heading" id="collapseListGroupHeading4"
+					data-toggle="collapse" data-target="#collapseListGroup4" role="tab">
+					<h4 class="panel-title">
+						考试管理<span class="glyphicon glyphicon-chevron-down right"></span>
+					</h4>
+				</div>
+				<div id="collapseListGroup4" class="panel-collapse collapse"
+					role="tabpanel" aria-labelledby="collapseListGroupHeading4">
+					<ul class="list-group">
+						<li class="list-group-item">
+							<a href="./admin/exam/examInfoNew.jsp" role="button">
+							<span class="glyphicon glyphicon-triangle-right"></span>新增考试</a>
+						</li>
+						<li class="list-group-item">
+						 <a href="./admin/exam/examInfoList.jsp" role="button">
+							<span class="glyphicon glyphicon-triangle-right"></span>查看考试</a>
+						</li>
+						<li class="list-group-item">
+							<button class="menu-item-left">
+								<span class="glyphicon glyphicon-triangle-right"></span>分组项3-3
+							</button>
+						</li>
+						<li class="list-group-item">
+							<button class="menu-item-left">
+								<span class="glyphicon glyphicon-triangle-right"></span>分组项3-4
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			<!--panel end-->
+			
+			<div class="panel panel-primary leftMenu">
+				<div class="panel-heading" id="collapseListGroupHeading5"
+					data-toggle="collapse" data-target="#collapseListGroup5" role="tab">
 					<h4 class="panel-title">
 						fz<span class="glyphicon glyphicon-chevron-down right"></span>
 					</h4>
 				</div>
-				<div id="collapseListGroup3" class="panel-collapse collapse"
-					role="tabpanel" aria-labelledby="collapseListGroupHeading2">
+				<div id="collapseListGroup5" class="panel-collapse collapse"
+					role="tabpanel" aria-labelledby="collapseListGroupHeading5">
 					<ul class="list-group">
 						<li class="list-group-item">
 							<button class="menu-item-left" onclick="get_students_page()">
@@ -182,41 +227,6 @@
 					</ul>
 				</div>
 			</div>
-			
-			<div class="panel panel-primary leftMenu">
-				<div class="panel-heading" id="collapseListGroupHeading4"
-					data-toggle="collapse" data-target="#collapseListGroup4" role="tab">
-					<h4 class="panel-title">
-						考试管理<span class="glyphicon glyphicon-chevron-down right"></span>
-					</h4>
-				</div>
-				<div id="collapseListGroup4" class="panel-collapse collapse"
-					role="tabpanel" aria-labelledby="collapseListGroupHeading4">
-					<ul class="list-group">
-						<li class="list-group-item">
-							<button class="menu-item-left" onclick="get_students_page()">
-								<span class="glyphicon glyphicon-triangle-right"></span>新增考试
-							</button>
-						</li>
-						<li class="list-group-item">
-							<button class="menu-item-left">
-								<span class="glyphicon glyphicon-triangle-right"></span>查看考试
-							</button>
-						</li>
-						<li class="list-group-item">
-							<button class="menu-item-left">
-								<span class="glyphicon glyphicon-triangle-right"></span>分组项3-3
-							</button>
-						</li>
-						<li class="list-group-item">
-							<button class="menu-item-left">
-								<span class="glyphicon glyphicon-triangle-right"></span>分组项3-4
-							</button>
-						</li>
-					</ul>
-				</div>
-			</div>
-			
 		</div>
 
 

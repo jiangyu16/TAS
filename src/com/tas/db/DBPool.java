@@ -2,14 +2,20 @@ package com.tas.db;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 /*
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;*/
 
-public class DBPool {
+public class DBPool <T>{
 	// private String jndiName = "java:comp/env/jdbc/tas";
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
@@ -103,5 +109,50 @@ public class DBPool {
 		if (conn != null)
 			conn.close(); 
 		return res;
+	}
+	public int doBatch(String sql,Class<T> c,T[] list,Map<Integer,String> methodMap,Map<Integer, Object> paramMap ) throws SQLException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		int []result = null;
+		conn =this.getConnection();
+		// conn.setAutoCommit(false); 
+		pstmt = conn.prepareStatement(sql);
+		for(T bean: list){
+			Set<Map.Entry<Integer,String>> mmEntrySet =  methodMap.entrySet();
+			Iterator<Map.Entry<Integer,String>> mmit = mmEntrySet.iterator();
+			while(mmit.hasNext()){//通过bean的get方法，获取数据注入到sql语句中
+				Map.Entry<Integer,String> entry = mmit.next();
+			   Method method = c.getMethod(entry.getValue(), new Class[]{});
+			   pstmt.setObject(entry.getKey(), method.invoke(bean,new Object[]{} ));
+			}
+			Set<Map.Entry<Integer, Object>> pmEntrySet =paramMap.entrySet();
+			Iterator<Map.Entry<Integer, Object>> pmit = pmEntrySet.iterator();
+			while(pmit.hasNext()){
+				Map.Entry<Integer,Object> entry = pmit.next();
+				pstmt.setObject(entry.getKey(), entry.getValue());
+			}
+			
+			//for(int i=1;i<=methodNames.length;i++){
+			//	Method method=c.getMethod(methodNames[i], new Class[]{});
+			//	pstmt.setObject(i, method.invoke(bean,new Object[]{} ));
+				
+				// (c.getMethod(methodNames[i], new Class[]{})).invoke(bean, new Object[]{});
+				
+			//}
+			pstmt.addBatch();
+		}
+		try{
+		result=pstmt.executeBatch();
+		}catch(SQLException e){
+		//	System.out.println(result.length);
+		}
+		//conn.commit();
+		//conn.setAutoCommit(true);
+		// System.out.println("有错误");
+		
+//		for(int k:result){
+//			System.out.println(k);
+//		}
+		if(result!=null) return result.length;
+		else return 0;
+		 
 	}
 }

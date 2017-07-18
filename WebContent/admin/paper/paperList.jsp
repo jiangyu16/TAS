@@ -9,11 +9,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <base href="<%=basePath%>" > 
+ 
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+
+<script src="<%=basePath %>bootstrap/js/jquery-2.1.1.js"></script>
+<script src="<%=basePath %>bootstrap/js/bootstrap.min.js"></script>
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/moment.js"></script>
+<script src="angular/angular.min.js"></script>
+
+
+
 <meta charset="UTF-8">
+
+
+
 <title>试卷列表</title>
 </head>
 <body>
+  <br> <br>
+	<div class="row col-md-1"></div>
+	<div class="row col-xs-2  col-md-1">
+		<div></div>
+		<jsp:include page="../frame/AdminLeft.jsp"></jsp:include>
+
+	</div>
+	<div class="row col-xs-1 col-md-1"></div>
+	<div class="row col-xs-4 col-md-4">
+  
 	<div class="container">
+	<br> <br>
 		<form role="form">
 
 			<div class="form-group row col-md-2">
@@ -86,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		</div>
 	</div>
-
+</div>
 </body>
 
 <script type="text/javascript">
@@ -122,6 +154,8 @@ jQuery(document).ready(function() {
 
 //获取paperList
 var getPaperList = function(){
+	 
+	$("#paperListTbody").empty();
 	var courseId = $("#course").val();//课程
 	var teacherId = $("#teacherId").val()//用户ID
 	var paperType =  $("#paperType").val()//类型
@@ -132,9 +166,11 @@ var getPaperList = function(){
 				,"curPage":curPageT,"pageSize":pageSizet}; 
 	//后端返回一个PageControl对象
 	$.getJSON(url,args,function(data){
-		if(data.paperList.length==0){
+		//alert("当前系统里没有试卷");
+		if(data.list.length==0){
 			alert("当前系统里没有试卷");
 		}else{
+			//alert("当前系统里没有试卷");
 			//获取后台传递的PageControl对象,赋给dataList
 			dataList=data.list;
 			for(var i=0;i<dataList.length;i++){
@@ -142,7 +178,7 @@ var getPaperList = function(){
 				var type;
 				if(dataList[i].paperType==1){
 					type="试卷";	
-				}else if(paperList[i].paperType==2){
+				}else if(dataList[i].paperType==2){
 					type="实验";	
 				}else if(dataList[i].paperType==3){
 					type="练习";	
@@ -151,7 +187,7 @@ var getPaperList = function(){
 				html+="<td>"+dataList[i].teacherId+"</td><td>"+dataList[i].choiceScore+"</td><td>"+dataList[i].programScore+"</td><td>"+dataList[i].courseId+"</td>";
 				//在编程题按钮中添加了value值为paperId
 				html+="<td><button class='btn btn-primary' value='"+dataList[i].paperId+"'>编程题</button></td></tr>";
-				$("#course").html(html);
+				$("#paperListTbody").append(html);
 			}
 			
 		}
@@ -173,5 +209,6 @@ $("#queryPaper").click(function(){
 	//调用getPaperList方法
 	getPaperList();
 });
+$("#collapseListGroupHeading2").click();
 </script>
 </html>

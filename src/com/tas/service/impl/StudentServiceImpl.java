@@ -19,20 +19,23 @@ public class StudentServiceImpl implements StudentService{
 		int success=0;//成功的数量
 		int total=0;//总执行数据量
 		int fail;//失败的数量
-		while(iter.hasNext()){
-			Student student=(Student) iter.next();
-		//	System.out.println(student);
-			studentdao=new StudentDaoImpl();
-			//先查询该id是否已存在,若不存在将student插入
-			System.out.println("正在插入...............");
-			int i = studentdao.insertStudent(student);
-			if(i==1){
-				success++;
-			}
-			total++;		
-		}
-		fail=total-success;
-		System.out.println("总共执行插入"+total+"条数据,"+success+"条成功,"+fail+"条失败");
+		studentdao=new StudentDaoImpl();
+		total=studentdao.insertStuents((Student[])stuList.toArray(new Student[stuList.size()]));
+//		while(iter.hasNext()){
+//			Student student=(Student) iter.next();
+//		//	System.out.println(student);
+//			studentdao=new StudentDaoImpl();
+//			//先查询该id是否已存在,若不存在将student插入
+//			System.out.println("正在插入...............");
+//			int i = studentdao.insertStudent(student);
+//			if(i==1){
+//				success++;
+//			}
+//			total++;		
+//		}
+	//	fail=total-success;
+		//System.out.println("总共执行插入"+total+"条数据,"+success+"条成功,"+fail+"条失败");
+		System.out.println("插入"+total+"条");
 	}
 
 

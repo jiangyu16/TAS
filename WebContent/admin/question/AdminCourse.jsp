@@ -8,14 +8,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html>
 <head>
-<base href="<%=basePath%>" > 
+<base href="<%=basePath%>">
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+
+<script src="<%=basePath %>bootstrap/js/jquery-2.1.1.js"></script>
+<script src="<%=basePath %>bootstrap/js/bootstrap.min.js"></script>
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/moment.js"></script>
+<script src="angular/angular.min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-   	<link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet">
-    <link href="bootstrap/css/blog-home.css" rel="stylesheet">
-    <script src="<%=basePath %>bootstrap/js/jquery-2.1.1.js"></script>
-    <script src="<%=basePath %>bootstrap/js/bootstrap.min.js"></script>
+
+<title>课程管理</title>
+	 
 </head>
  
 <script type="text/javascript">
@@ -36,7 +47,7 @@ jQuery(document).ready(function() {
 		}
 	});});
   
-	$("#course").change(show_chapter);
+	
 	var chapterArray;
 	var chapterNameTextReadOnly=false;
 	var update_chapterId;
@@ -120,9 +131,19 @@ function new_chapter(){
 		});
 	}
 }
+$("#course").change(show_chapter);
 </script>
 <body>
-<br>
+
+<br> <br>
+	<div class="row col-md-1"></div>
+	<div class="row col-xs-2  col-md-1">
+		<div></div>
+		<jsp:include page="../frame/AdminLeft.jsp"></jsp:include>
+
+	</div>
+	<div class="row col-md-1"></div>
+	<div class="row col-xs-4 col-md-4">
  <div class="container">
  
    
@@ -190,6 +211,10 @@ function new_chapter(){
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
-</div>   
+</div>  </div> 
 </body>
+<script>
+$("#course").change(show_chapter);
+$("#collapseListGroupHeading1").click();
+</script>
 </html>

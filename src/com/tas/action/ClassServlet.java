@@ -53,16 +53,16 @@ public class ClassServlet extends HttpServlet {
 			int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			
 			ClassService cs = new ClassServiceImpl();
-			List<T_Class> cls = new ArrayList<T_Class>();
-			ClassDao cd = new ClassDaoImpl();
+//			List<T_Class> cls = new ArrayList<T_Class>();
+//			ClassDao cd = new ClassDaoImpl();
 			
 				PageControl<T_Class> pc = cs.getClassByClassId(curPage, pageSize);
-				System.out.println(" "+curPage+" "+ pageSize);
+				//System.out.println(" "+curPage+" "+ pageSize);
 				// ppls =ppd.getProgramProblemByLanguage(courseId, 0, 10);
 				ObjectMapper mapper=new ObjectMapper();
 				String result= mapper.writeValueAsString(pc);
-				//System.out.println(result);
-				System.out.println(pc.getTotalPages());
+				 System.out.println(result);
+				//System.out.println(pc.getTotalPages());
 				response.setContentType("text/javascript");
 				response.setCharacterEncoding("utf-8");
 				response.getWriter().print(result); 

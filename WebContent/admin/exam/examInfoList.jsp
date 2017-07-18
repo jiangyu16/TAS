@@ -111,7 +111,7 @@ var pageSize=12;
 			// alert( $($event.target).text());
 			//$($event.target).text()获得id值
 			path=path+"?examInfoId="+ value;
-			 window.location=path;
+			 window.location=path;//跳转
 			
 		};
 		$scope.Previous= function(){

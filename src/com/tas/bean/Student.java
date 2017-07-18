@@ -6,7 +6,14 @@ public class Student {
 	private String stuName;
 	private int classId;
 	private String lastLoginIp;
+	private String lastLoginTime;
 	
+	public String getLastLoginTime() {
+		return lastLoginTime;
+	}
+	public void setLastLoginTime(String lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
 	public String getStudentId() {
 		return studentId;
 	}
@@ -31,9 +38,7 @@ public class Student {
 	public void setClassId(int classId) {
 		this.classId = classId;
 	}
-//	public String toString(){
-//		return "学号:"+studentId+"  "+"姓名:"+stuName+"	"+"班级:"+classId+"   "+"最后登陆Ip"+lastLoginIp;
-//	}
+
 	public String getLastLoginIp() {
 		return lastLoginIp;
 	}

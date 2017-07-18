@@ -55,10 +55,12 @@ public class ExamStudentServiceImpl implements ExamStudentService {
 		 ExamStudent[]  ess;
 		 int i=0;
 		try {
+			//从json数据中把数组读出来
 			ess = (ExamStudent[]) objectMapper.readValue(examStudents, ExamStudent[].class);
-			for(ExamStudent es:ess){
-				i=i+new ExamStudentDaoImpl().deleteExamStudent(examInfoId, es.getStudentId());
-			}
+			i= new ExamStudentDaoImpl().deleteExamStudents(ess, examInfoId);
+//			for(ExamStudent es:ess){
+//				i=i+new ExamStudentDaoImpl().deleteExamStudent(examInfoId, es.getStudentId());
+//			}
 			
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block

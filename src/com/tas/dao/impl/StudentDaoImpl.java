@@ -3,7 +3,9 @@ package com.tas.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.tas.bean.ProgramProblem;
 import com.tas.bean.Student;
@@ -98,10 +100,11 @@ public class StudentDaoImpl implements StudentDao {
 		try {
 			result = dbPool.doUpdate(sql, new Object[] { studentId });
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			dbPool.close();
 		}
-
+		System.out.println(result);
 		return result;
 	}
 
@@ -109,14 +112,16 @@ public class StudentDaoImpl implements StudentDao {
 	public int resetPassword(String studentId) {
 
 		DBPool dbPool = new DBPool();
-		String sql = "update T_Student set password=+" + studentId + " where studentId=? ";
+		String sql = "update T_Student set password= ? where studentId=? ";
 		int result = 0;
 
 		try {
-			result = dbPool.doUpdate(sql, new Object[] { studentId });
+			result = dbPool.doUpdate(sql, new Object[] { studentId ,studentId});
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			dbPool.close();
 		}
 
 		return result;
@@ -138,6 +143,37 @@ public class StudentDaoImpl implements StudentDao {
 			dbpool.close();
 		}
 		return i;
+	}
+
+	@Override
+	public int insertStuents(Student[] students) {
+		// TODO Auto-generated method stub
+		int i = 1;
+		DBPool<Student> dbpool = new DBPool<Student>();
+		//String sql = "SET NOCOUNT ON insert into t_student values(?,?,?,?,?)";
+		String sql = " insert into t_student values(?,?,?,?,?)";
+		Map<Integer,Object> paramMap=new HashMap<Integer,Object>();
+	//	paramMap.put(1, examInfoId);
+		Map<Integer,String> methodMap = new HashMap<Integer,String>();
+		methodMap.put(1, "getStudentId");
+		methodMap.put(2, "getStudentId");methodMap.put(3, "getStuName");
+		methodMap.put(4, "getClassId");methodMap.put(5, "getLastLoginIp");
+		try {
+			i= dbpool.doBatch(sql, Student.class, students, methodMap, paramMap);
+			System.out.println("insert success ");
+		} catch (SQLException e) {
+			System.out.println("isert failed");
+			//i=0;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			dbpool.close();
+		}
+		//System.out.println(x);
+		return i;
+		
+	//	return 0;
 	}
 	
 	

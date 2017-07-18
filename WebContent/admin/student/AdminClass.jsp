@@ -8,12 +8,143 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html>
 <head>
-<base href="<%=basePath%>" > 
+<base href="<%=basePath%>">
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+
+<script src="<%=basePath %>bootstrap/js/jquery-2.1.1.js"></script>
+<script src="<%=basePath %>bootstrap/js/bootstrap.min.js"></script>
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/moment.js"></script>
+<script src="angular/angular.min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>班级管理</title>
 	
 </head>
+
+<body>
+
+
+<br>
+ <br>
+	<div class="row col-md-1"></div>
+	<div class="row col-xs-2  col-md-1">
+		<div></div>
+		<jsp:include page="../frame/AdminLeft.jsp"></jsp:include>
+
+	</div>
+	<div class="row col-md-1"></div>
+	<div class="row col-xs-4 col-md-4">
+ <div class="container">
+ 
+   
+	<!-- <div class="form-group row col-md-4">
+		<select  class="form-control" id="course">
+		<option value=0>请选择</option>
+		</select>
+		 
+	</div> -->
+	
+	<div class="form-group row col-md-5">
+	 
+	  <div class="input-group">
+             
+            <input type="text" class="form-control" placeholder="请输入班级名称" id="searchName_text">
+             <span class="input-group-btn">
+              <button class="btn btn-default" type="button" onclick="search_class(1)" >查找</button>
+              </span>
+        </div>
+        
+	</div>
+	
+	 <div class="form-group row col-md-1">
+		 
+	</div>
+	<div class="form-group row col-md-5">
+	 
+	  <div class="input-group">
+             
+            <input type="text" class="form-control" placeholder="请输入班级名称" id="className_text">
+             <span class="input-group-btn">
+              <button class="btn btn-default" type="button" onclick="new_class ( )" >新增</button>
+              </span>
+        </div>
+        
+	</div>
+	
+ 
+</div>
+
+	<div class="container  ">
+		<div class="row col-md-10">
+			<table class="table table-striped" id="questionlist">
+				<thead>
+					<tr>
+						<th>班级ID</th>
+						<th>班级名称</th>
+						<th>查看学生</th>
+						<th>修改</th>
+						<th>删除</th>
+					</tr>
+				</thead>
+				<colgroup>
+					<col style="width: 20%">
+					<col style="width: 50%">
+					<col style="width: 10%">
+					<col style="width: 10%">
+					<col style="width: 10%">
+				</colgroup>
+				<tbody id="questlisttbody">
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+	<div class="container">
+		<ul class="pagination" id="page">
+		</ul>
+	</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="update_chapterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">修改班级名称</h4>
+            </div>
+             <div class="modal-body">
+       
+           
+            <form class="form-horizontal"  id="editForm"   method="post">
+                    <div class="form-group">
+                         
+                        <div  >
+                            <input type="text" placeholder="请输入班级名称" class="form-control input-sm" name="username" id="updatechapterName">
+                        </div>
+                         
+                    </div>
+                     
+                </form>
+                 </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="update_chapter()">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div> </div>  
+</body>
+
+
 <script>
+$("#collapseListGroupHeading3").click();
 var ctrPage=1;//翻页按钮的页面
 var ctrpagenum=5;//翻页按钮每页有几个按钮
 var totalPagest;//总共有多少页
@@ -127,8 +258,10 @@ function get_classes_fun(curPage){
 function redirect_class_student(classId,className){
 	
 	// alert(className);
-	$("#questionlist").empty();
-	$("#questionlist").load("./admin/student/student_list.jsp?classId="+classId+"&className="+className);
+	//跳转到学生列表页面
+	 window.location="./admin/student/student_list.jsp?classId="+classId+"&className="+className;
+	//$("#questionlist").empty();
+	//$("#questionlist").load("./admin/student/student_list.jsp?classId="+classId+"&className="+className);
 }
 function show_update_chapter_modal(chapterId){
 	update_chapterId=chapterId;
@@ -227,107 +360,6 @@ function search_class (curPage){
 
 
 </script>
-<body>
-<br>
- <div class="container">
- 
-   
-	<!-- <div class="form-group row col-md-4">
-		<select  class="form-control" id="course">
-		<option value=0>请选择</option>
-		</select>
-		 
-	</div> -->
-	
-	<div class="form-group row col-md-5">
-	 
-	  <div class="input-group">
-             
-            <input type="text" class="form-control" placeholder="请输入班级名称" id="searchName_text">
-             <span class="input-group-btn">
-              <button class="btn btn-default" type="button" onclick="search_class(1)" >查找</button>
-              </span>
-        </div>
-        
-	</div>
-	
-	 <div class="form-group row col-md-1">
-		 
-	</div>
-	<div class="form-group row col-md-5">
-	 
-	  <div class="input-group">
-             
-            <input type="text" class="form-control" placeholder="请输入班级名称" id="className_text">
-             <span class="input-group-btn">
-              <button class="btn btn-default" type="button" onclick="new_class ( )" >新增</button>
-              </span>
-        </div>
-        
-	</div>
-	
- 
-</div>
 
-	<div class="container  ">
-		<div class="row col-md-10">
-			<table class="table table-striped" id="questionlist">
-				<thead>
-					<tr>
-						<th>班级ID</th>
-						<th>班级名称</th>
-						<th>查看学生</th>
-						<th>修改</th>
-						<th>删除</th>
-					</tr>
-				</thead>
-				<colgroup>
-					<col style="width: 20%">
-					<col style="width: 50%">
-					<col style="width: 10%">
-					<col style="width: 10%">
-					<col style="width: 10%">
-				</colgroup>
-				<tbody id="questlisttbody">
-				</tbody>
-			</table>
-
-		</div>
-	</div>
-	<div class="container">
-		<ul class="pagination" id="page">
-		</ul>
-	</div>
-
-<!-- 模态框（Modal） -->
-<div class="modal fade" id="update_chapterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">修改班级名称</h4>
-            </div>
-             <div class="modal-body">
-       
-           
-            <form class="form-horizontal"  id="editForm"   method="post">
-                    <div class="form-group">
-                         
-                        <div  >
-                            <input type="text" placeholder="请输入班级名称" class="form-control input-sm" name="username" id="updatechapterName">
-                        </div>
-                         
-                    </div>
-                     
-                </form>
-                 </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="update_chapter()">提交更改</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>   
-</body>
 
 </html>

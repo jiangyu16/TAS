@@ -32,7 +32,7 @@ public class RedirectServlet extends HttpServlet {
 		
 		//if(request.getParameter(""))
 		System.out.println("wewwe");
-		request.getRequestDispatcher("/admin/exam/examInfoNew.jsp").forward(request, response);
+		//request.getRequestDispatcher("/admin/exam/examInfoNew.jsp").forward(request, response);
 		
 		
 	}

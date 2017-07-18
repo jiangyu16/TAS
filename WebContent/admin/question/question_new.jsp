@@ -9,13 +9,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html>
 <head>
-<base href="<%=basePath%>" > 
+<base href="<%=basePath%>">
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+
+<script src="<%=basePath %>bootstrap/js/jquery-2.1.1.js"></script>
+<script src="<%=basePath %>bootstrap/js/bootstrap.min.js"></script>
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<script
+	src="<%=basePath %>bootstrap/bootstrap-datetimepicker/js/moment.js"></script>
+<script src="angular/angular.min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>新增题目</title>
 	
 </head>
  
 <script type="text/javascript">
+
 
 var courselist;
  
@@ -89,6 +104,15 @@ function save_program(){
 }
 </script>
 <body>
+<br> <br>
+	<div class="row col-md-1"></div>
+	<div class="row col-xs-2  col-md-1">
+		<div></div>
+		<jsp:include page="../frame/AdminLeft.jsp"></jsp:include>
+
+	</div>
+	<div class="row col-md-1"></div>
+	<div class="row col-xs-4 col-md-4">
  
 <div class ="container">
 <form name="formlwn" id="programForm" role="form"  style="width:80%" action="QuestionServlet?action=save_program" method="post" onsubmit="return false;">
@@ -143,6 +167,11 @@ function save_program(){
 	
 	 
    
-</div>  
+</div> </div> 
 </body>
+<script type="text/javascript">
+$("#collapseListGroupHeading1").click();
+</script>
 </html>
+
+

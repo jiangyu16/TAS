@@ -35,7 +35,7 @@ public class PageControl <T>{
 		 int i= (curPage-1)/5;
 		 int j;
 		 
-		 for(j=1;j<=pageListSize&&j<=(totalPages);j++)pageList.add(i*5+j);
+		 for(j=1;j<=pageListSize&&(i*5+j)<=(totalPages);j++)pageList.add(i*5+j);
 		
 	}
 	

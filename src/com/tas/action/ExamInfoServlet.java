@@ -35,7 +35,7 @@ public class ExamInfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		String actionName=request.getParameter("action");
+		String actionName=request.getParameter("action");//getExamAllInfos
 		System.out.println(actionName);
 		if (actionName.equals("getExamInfoById")) {
 				

@@ -66,8 +66,25 @@ public class StudentServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		response.setContentType("text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		String actionName=request.getParameter("action");
+		
+		if(actionName.equals("del_student")) {
+			String studentId = request.getParameter("studentId");
+			int res = new StudentDaoImpl().delStudent(studentId);
+			System.out.println(res);
+			response.setContentType("text/javascript");
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(res);
+		} else if(actionName.equals("reset_password")); {
+			String studentId = request.getParameter("studentId");
+			int res = new StudentDaoImpl().resetPassword(studentId);
+			response.setContentType("text/javascript");
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(res);
+		}
 	}
 }

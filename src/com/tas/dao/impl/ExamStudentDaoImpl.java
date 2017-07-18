@@ -3,7 +3,9 @@ package com.tas.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.tas.bean.ExamStudent;
 import com.tas.dao.ExamStudentDao;
@@ -117,6 +119,31 @@ public class ExamStudentDaoImpl implements ExamStudentDao {
 			dbpool.close();
 		}
 		return result;
+	}
+
+	@Override
+	public int deleteExamStudents(ExamStudent[] examStudents, String examInfoId) {
+		// TODO Auto-generated method stub
+		DBPool<ExamStudent> dbpool= new DBPool<ExamStudent>();
+		String sql="DELETE FROM [dbo].[T_Exam] WHERE examInfoId=? and studentId=? ";
+		Map<Integer,Object> paramMap=new HashMap<Integer,Object>();
+		paramMap.put(1, examInfoId);
+		Map<Integer,String> methodMap = new HashMap<Integer,String>();
+		methodMap.put(2, "getStudentId");
+		int result = 0;
+		try {
+			result = dbpool.doBatch(sql, ExamStudent.class, examStudents, methodMap, paramMap);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			dbpool.close();
+		}
+		return result;
+		//return 0;
 	}
 
 }
