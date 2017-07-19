@@ -115,7 +115,7 @@
 					role="tabpanel" aria-labelledby="collapseListGroupHeading2">
 					<ul class="list-group">
 						<li class="list-group-item">
-							<a href="./admin/paper/paperList.jsp" role="button">
+							<a href="./admin/paper/AdminPaper.jsp" role="button">
 							<span class="glyphicon glyphicon-triangle-right"></span>查询Paper</a>
 						</li>
 					</ul>

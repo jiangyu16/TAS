@@ -1,7 +1,9 @@
 package com.tas.dao.impl;
 
-import java.sql.Connection;
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.tas.bean.Teacher;
 import com.tas.dao.TeacherDao;
@@ -38,5 +40,30 @@ public class TeacherDaoImpl implements TeacherDao {
 		
 		return teacher;
 	}
+
+    @Override
+    public List<Teacher> getTeachers() {
+        List<Teacher> teacherList = new ArrayList<Teacher>();
+        DBPool dbpool = new DBPool();
+        String sql="select [teacherId],[password],[teacherName],[admin] from T_Teacher";
+        ResultSet rs=null; 
+        Teacher teacher = null;
+           try {
+               rs=dbpool.doQueryRS(sql, new Object[]{ });
+               while (rs.next()) {
+                   teacher = new Teacher();
+                   teacher.setTeacherId(rs.getString("teacherId"));
+                   teacher.setPassword(rs.getString("password"));
+                   teacher.setTeacherName(rs.getString("teacherName"));
+                   teacher.setAdmin(rs.getBoolean("admin"));
+                   teacherList.add(teacher);
+               } 
+           } catch (SQLException e) {
+               e.printStackTrace();
+           }finally{
+               dbpool.close();
+           }
+           return teacherList;
+    }
 
 }

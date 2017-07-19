@@ -85,6 +85,7 @@ public class DBPool <T>{
 	}
 
 	public ResultSet doQueryRS(String sql, Object[] params) throws SQLException {
+		System.out.println(sql);
 		conn = this.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		for (int i = 0; i < params.length; i++) {
